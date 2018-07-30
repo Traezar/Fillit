@@ -21,9 +21,11 @@ int recur(char **board,t_tetro *tetromino,int boardsize,int pos, int alp)
 	return (1);
 	while (pos < (boardsize * boardsize))
 	{
-		placep (board,&tetromino[z],boardsize, pos, alp);
-		if(!(recur(board,&tetromino[z + 1], boardsize,0, alp)))
+		if (placep (board,&tetromino[z],boardsize, pos, alp))
+		{
+			if(!(recur(board,&tetromino[z + 1], boardsize,0, alp)))
 			removp(board,&tetromino[z],boardsize,pos, alp);
+		}
 		pos++;
 	}
 	if (pos == (boardsize * boardsize))

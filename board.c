@@ -19,18 +19,21 @@ char **make_board (int size)
 	int i;
 	char **board;
 
-	i = 0;
-	if (!(board = (char **)malloc(sizeof(char *) * size)))
+	i = -1;
+	if (!(board = (char **)malloc(sizeof(char *) * size + 1)))
 		return (NULL);
+	ft_putstr(" y -axis created \n");
 	while (i < size)
 	{
-		if (!(board[i++] = (char *)malloc(sizeof(char) * size)))
+		if (!(board[++i] = (char *)malloc(sizeof(char) * size + 1)))
 			return (NULL);
 	}
+	ft_putstr(" x -axis created \n");
 	i = 0;
 	while (i < size)
 	{
-		ft_striter(board[i], ft_memset(board[i], '.', size ));
+		ft_striter(board[i], ft_memset(&board[i], '.', size));
+		ft_putstr(" striter done at least once \n");
 		i++;
 	}
 	return (board);
@@ -67,11 +70,12 @@ int solve(t_tetro **tetromino)
 
 		if (!(board = make_board(boardsize)))
 		return (-1);
-
+		ft_putstr(" about to start recursion \n");
 	while (recur(board,tetromino[0], boardsize, 0, 0) == 0)
 		{
 			free (board);
 			boardsize++;
+			ft_putstr(" board remade \n");
 			if (!(board = make_board(boardsize)))
 			return (-1);
 		}

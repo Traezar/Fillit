@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 	ft_putstr ("before tetro_array \n");
 	array = tetro_array(buf);
 	ft_putstr ("until read is good \n");
-	if (!(solve(array)))
+	if ((solve(array) == -1))
 		ft_putstr( "solving failure \n");
 	return (0);
 }
