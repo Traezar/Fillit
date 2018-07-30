@@ -9,21 +9,22 @@
 /*   Updated: 2018/07/26 00:04:27 by rsathiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
 #include "fillit.h"
 
 
 
-char ** make_board(size_t size)
+char **make_board (int size)
 {
-	int count;
+	int i;
+	char **board;
 
 	i = 0;
 	if (!(board = (char **)malloc(sizeof(char *) * size)))
 		return (NULL);
 	while (i < size)
 	{
-		if (!(board[i++] = (char *)malloc(sizeof(char)i * size)))
+		if (!(board[i++] = (char *)malloc(sizeof(char) * size)))
 			return (NULL);
 	}
 	i = 0;
@@ -35,11 +36,31 @@ char ** make_board(size_t size)
 	return (board);
 }
 
+int					printout(char **board,int boardsize)
+{
+	int posx;
+	int posy;
+	int pos;
 
-int solve(tetromino)
+	pos = 0;
+	posx = pos%boardsize;
+	posy = pos/boardsize;
+	while (pos < (boardsize * boardsize))
+	{
+		if (pos == boardsize - 1)
+		ft_putchar ('\n');
+		ft_putchar (board[posy][posx]);
+		pos++;
+	}
+	return (1);
+}
+
+
+int solve(t_tetro **tetromino)
 {
 		char ** board;
 		int			boardsize;
+		int			i;
 
 		i = 0;
 		boardsize = 2;
@@ -47,13 +68,13 @@ int solve(tetromino)
 		if (!(board = make_board(boardsize)))
 		return (-1);
 
-	while (recursionsolution (board, tetromino[i], boardsize, 0) == 0)
+	while (recur(board,tetromino[0], boardsize, 0, 0) == 0)
 		{
 			free (board);
 			boardsize++;
-			if !(board = makeboard(boardsize))
+			if (!(board = make_board(boardsize)))
 			return (-1);
 		}
-		printout (board);
+		printout (board, 0);
 		return 0;
 }

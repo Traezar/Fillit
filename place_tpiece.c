@@ -6,29 +6,29 @@
 /*   By: rsathiad <3kiraj@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 00:04:58 by rsathiad          #+#    #+#             */
-/*   Updated: 2018/07/26 00:08:33 by rsathiad         ###   ########.fr       */
+/*   Updated: 2018/07/30 10:21:55 by rsathiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
 #include "fillit.h"
 
-int place_tpiece (tetromino, board, boardsize, pos)
+int placep (char ** board, t_tetro *tetromino, int boardsize, int pos, int alp)
 {
 	int x;
 	int y;
 
 	x = pos/boardsize;
 	y = pos%boardsize;
-	char c = tetromino.alphabet;
-	if (board [y + tetromino.one.y] [x + tetromino.one.x] = '.' &&
-		board [y + tetromino.two.y][x + tetromino.two.x] = '.' &&
-		board [y + tetromino.three.y][x + tetromino.three.x] = '.' &&
-		board [y + tetromino.four.y][x + tetromino.four.x]  = '.')
+	char c = alp + 'A';
+	if (board [y + tetromino->p0->y][x + tetromino->p0->x] == '.' &&
+		board [y + tetromino->p1->y][x + tetromino->p1->x] == '.' &&
+		board [y + tetromino->p2->y][x + tetromino->p2->x] == '.' &&
+		board [y + tetromino->p3->y][x + tetromino->p3->x] == '.' )
 		{
-			board [y + tetromino.one.y] [x + tetromino.one.x] = c ;
-			board [y + tetromino.two.y][x + tetromino.two.x] = c ;
-			board [y + tetromino.three.y][x + tetromino.three.x] = c ;
-			board [y + tetromino.four.y][x + tetromino.four.x]  = c ;
+			board [y + tetromino->p0->y][x + tetromino->p0->x] = c ;
+			board [y + tetromino->p1->y][x + tetromino->p1->x] = c ;
+			board [y + tetromino->p2->y][x + tetromino->p2->x] = c ;
+			board [y + tetromino->p3->y][x + tetromino->p3->x]  = c ;
 			return (1);
 		}
 		else
@@ -36,23 +36,23 @@ int place_tpiece (tetromino, board, boardsize, pos)
 }
 
 
-int remove_tpiece (tetromino, board, boardsize, pos)
+int removp(char ** board, t_tetro *tetromino, int boardsize, int pos, int alp)
 {
 	int x;
 	int y;
 
 	x = pos%boardsize;
 	y = pos/boardsize;
-	char c = tetromino.alphabet;
-	if (board [y + tetromino.one.y] [x + tetromino.one.x] = c &&
-		board [y + tetromino.two.y][x + tetromino.two.x] = c &&
-		board [y + tetromino.three.y][x + tetromino.three.x] = c &&
-		board [y + tetromino.four.y][x + tetromino.four.x]  = c)
+	char c = alp + 'A';
+	if (board [y + tetromino->p0->y][x + tetromino->p0->x] == c &&
+		board [y + tetromino->p1->y][x + tetromino->p1->x] == c &&
+		board [y + tetromino->p2->y][x + tetromino->p2->x] == c &&
+		board [y + tetromino->p3->y][x + tetromino->p3->x] == c)
 		{
-			board [y + tetromino.one.y] [x + tetromino.one.x] = '.' ;
-			board [y + tetromino.two.y][x + tetromino.two.x] = '.' ;
-			board [y + tetromino.three.y][x + tetromino.three.x] = '.' ;
-			board [y + tetromino.four.y][x + tetromino.four.x]  = '.' ;
+			board [y + tetromino->p0->y][x + tetromino->p0->x] = '.';
+			board [y + tetromino->p1->y][x + tetromino->p1->x] = '.';
+			board [y + tetromino->p2->y][x + tetromino->p2->x] = '.';
+			board [y + tetromino->p3->y][x + tetromino->p3->x] = '.';
 			return (1);
 		}
 		else
