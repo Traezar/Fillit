@@ -23,6 +23,6 @@ t_tetro		**tetro_array(char *buf)
 		j++;
 		i++;
 	}
-	array[j] = '\0';
-	return (array);	
+	array[j] = NULL;
+	return (array);
 }
