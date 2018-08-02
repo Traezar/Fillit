@@ -21,7 +21,7 @@ int		verify_nbrline(char *buf)
 	while (buf[i])
 	{
 		line = 0;
-		while (line < 4)
+		while (line < 4 && buf[i])
 		{
 			if (buf[i] == '\n')
 				line++;

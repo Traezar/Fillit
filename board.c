@@ -6,79 +6,76 @@
 /*   By: rsathiad <3kiraj@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 00:04:25 by rsathiad          #+#    #+#             */
-/*   Updated: 2018/07/26 00:04:27 by rsathiad         ###   ########.fr       */
+/*   Updated: 2018/08/01 12:53:40 by rsathiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-
-
-char **make_board (int size)
+char		**make_board(int size)
 {
-	int i;
-	char **board;
+	int		x;
+	int		y;
+	char	**board;
 
-	i = -1;
+	y = -1;
+	x = -1;
 	if (!(board = (char **)malloc(sizeof(char *) * size + 1)))
 		return (NULL);
-	ft_putstr(" y -axis created \n");
-	while (i < size)
+	while (x < size)
 	{
-		if (!(board[++i] = (char *)malloc(sizeof(char) * size + 1)))
+		if (!(board[++x] = (char *)malloc(sizeof(char) * size + 1)))
 			return (NULL);
 	}
-	ft_putstr(" x -axis created \n");
-	i = 0;
-	while (i < size)
+	x = -1;
+	while (++y < size)
 	{
-		ft_striter(board[i], ft_memset(&board[i], '.', size));
-		ft_putstr(" striter done at least once \n");
-		i++;
+		while (++x < size)
+			board[y][x] = '.';
+		x = -1;
 	}
 	return (board);
 }
 
-int					printout(char **board,int boardsize)
+int			printout(char **board, int boardsize)
 {
-	int posx;
-	int posy;
-	int pos;
+	int		posx;
+	int		posy;
+	int		pos;
 
 	pos = 0;
-	posx = pos%boardsize;
-	posy = pos/boardsize;
+	posx = 0;
+	posy = 0;
 	while (pos < (boardsize * boardsize))
 	{
-		if (pos == boardsize - 1)
-		ft_putchar ('\n');
-		ft_putchar (board[posy][posx]);
+		if (posx == 0 && pos != 0)
+			ft_putchar('\n');
+		ft_putchar(board[posy][posx]);
 		pos++;
+		posx = pos % boardsize;
+		posy = pos / boardsize;
 	}
+	//ft_putchar('\n');
 	return (1);
 }
 
-
-int solve(t_tetro **tetromino)
+int			solve(t_tetro **array)
 {
-		char ** board;
-		int			boardsize;
-		int			i;
+	char	**board;
+	int		boardsize;
+	int		i;
 
-		i = 0;
-		boardsize = 2;
-
-		if (!(board = make_board(boardsize)))
+	i = 0;
+	boardsize = 2;
+	if (!(board = make_board(boardsize)))
 		return (-1);
-		ft_putstr(" about to start recursion \n");
-	while (recur(board,tetromino[0], boardsize, 0, 0) == 0)
-		{
-			free (board);
-			boardsize++;
-			ft_putstr(" board remade \n");
-			if (!(board = make_board(boardsize)))
+	while (recur(board, array, 0) == 1)
+	{
+		free(board);
+		boardsize++;
+		if (!(board = make_board(boardsize)))
 			return (-1);
-		}
-		printout (board, 0);
-		return 0;
+	}
+	printout(board, boardsize);
+	return (0);
 }
